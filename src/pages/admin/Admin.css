@@ -1,0 +1,62 @@
+.admin-container {
+  display: flex;
+  height: 100vh;
+}
+
+.admin-side-nav {
+  width: 240px;
+  border-right: 1px solid #ddd;
+  padding: 20px;
+}
+
+.admin-side-nav h2 {
+  font-size: 1.5em;
+}
+
+.admin-side-nav h2 > a {
+  text-decoration: none;
+  color: #444;
+}
+.admin-side-nav h2 > a:hover {
+  text-decoration: none;
+  color: #111;
+}
+
+.admin-side-nav li > a {
+  text-decoration: none;
+  color: #777;
+}
+
+.admin-side-nav li > a:hover {
+  color: #444;
+}
+
+.admin-side-nav ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+.admin-side-nav li {
+  margin-bottom: 10px;
+}
+
+.admin-main {
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.admin-employee-manage table {
+  width: 100%;
+}
+.admin-employee-manage table,
+.admin-employee-manage th,
+.admin-employee-manage td {
+  border: 1px solid #ddd;
+  border-collapse: collapse;
+  padding: 8px;
+}
+
+.admin-employee-manage tbody > tr:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
