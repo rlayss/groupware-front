@@ -6,8 +6,13 @@ import AdminIndexPage from "./pages/admin/AdminIndex";
 import AdminManageEmployeePage from "./pages/admin/AdminManageEmployee";
 import UserIndexPage from "./pages/user/UserIndex";
 import UserWorkspacePage from "./pages/user/UserWorkspace";
+import { useState } from "react";
+import { UserProvider } from "./provider/UserProvider";
 
 function App() {
+  const [user, setUser] = useState(null);
+  console.log(user);
+
   const router = createBrowserRouter([
     {
       path: "/user/index",
@@ -31,7 +36,11 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
+  );
 }
 
 export default App;

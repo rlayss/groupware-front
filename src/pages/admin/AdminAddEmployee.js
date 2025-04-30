@@ -4,7 +4,7 @@ import "./Admin.css";
 
 function AdminAddEmployeePage() {
   const [department, setDepartment] = useState([]);
-  const [message, setMessage] = useState();
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     fetch("http://192.168.10.173:9090/api/department", { method: "get" })
