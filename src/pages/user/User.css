@@ -83,4 +83,17 @@
 .user-workspace-content {
   flex-grow: 1;
   padding: 20px;
+  color: #444;
+}
+
+.user-workspace-content h2,
+h3 {
+  font-weight: normal;
+  margin: 8px 0px;
+}
+
+.user-workspace-content ul {
+  list-style: none;
+  padding: 0px;
+  font-size: 0.9em;
 }

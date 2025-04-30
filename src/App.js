@@ -1,5 +1,5 @@
 import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 
 import AdminAddEmployeePage from "./pages/admin/AdminAddEmployee";
 import AdminIndexPage from "./pages/admin/AdminIndex";
@@ -8,6 +8,7 @@ import UserIndexPage from "./pages/user/UserIndex";
 import UserWorkspacePage from "./pages/user/UserWorkspace";
 import { useState } from "react";
 import { UserProvider } from "./provider/UserProvider";
+import UserChangePasswordPage from "./pages/user/UserChangePassword";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -15,12 +16,20 @@ function App() {
 
   const router = createBrowserRouter([
     {
+      path: "/",
+      element: <Navigate to="/user/index" />,
+    },
+    {
       path: "/user/index",
       element: <UserIndexPage />,
     },
     {
       path: "/user/workspace",
       element: <UserWorkspacePage />,
+    },
+    {
+      path: "/user/workspace/setting/password",
+      element: <UserChangePasswordPage />,
     },
     {
       path: "/admin/index",
@@ -38,7 +47,7 @@ function App() {
 
   return (
     <UserProvider>
-      <RouterProvider router={router} />
+      <RouterProvider router={router} />;
     </UserProvider>
   );
 }

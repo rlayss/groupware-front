@@ -5,7 +5,7 @@ import { useUserContext } from "../../provider/UserProvider";
 function UserIndexPage() {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
-  const { setUser } = useUserContext();
+  const { setUser, setToken } = useUserContext();
   const submitHandle = function (evt) {
     evt.preventDefault();
     const data = {
@@ -29,7 +29,9 @@ function UserIndexPage() {
       })
       .then(function (data) {
         setError(null);
-        setUser(data);
+        setUser(data.employee);
+        setToken(data.token);
+
         console.log(data);
         navigate("/user/workspace");
       })
