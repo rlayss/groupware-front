@@ -50,56 +50,38 @@ function UserChangePasswordPage() {
   };
 
   return (
-    <div className="user-workspace">
-      <div className="user-workspace-header">
-        <h2>GROUPWARE</h2>
-        <div className="info">
-          {user && (
-            <>
-              <span>{user.id}</span>/<span>{user.name}</span>/
-              <span>
-                {user.department.name} {user.position}
-              </span>
-            </>
-          )}
-        </div>
+    <>
+      <h2>사원 대시보드 &gt; 설정 &gt; 비밀번호 변경</h2>
+      <div>
+        <form onSubmit={submitHandle}>
+          <p>
+            <input
+              type="password"
+              placeholder="기존 비밀번호"
+              name="oldPassword"
+            />
+          </p>
+          <p>
+            <input
+              type="password"
+              placeholder="변경할 비밀번호"
+              name="newPassword"
+            />
+          </p>
+          <p>
+            <input
+              type="password"
+              placeholder="비밀번호 재확인"
+              name="passwordConfirm"
+            />
+          </p>
+          {result && <p> {result}</p>}
+          <p>
+            <button>적용하기</button>
+          </p>
+        </form>
       </div>
-      <div className="user-workspace-main">
-        <div className="user-workspace-side"></div>
-        <div className="user-workspace-content">
-          <h2>사원 대시보드 &gt; 설정 &gt; 비밀번호 변경</h2>
-          <div>
-            <form onSubmit={submitHandle}>
-              <p>
-                <input
-                  type="password"
-                  placeholder="기존 비밀번호"
-                  name="oldPassword"
-                />
-              </p>
-              <p>
-                <input
-                  type="password"
-                  placeholder="변경할 비밀번호"
-                  name="newPassword"
-                />
-              </p>
-              <p>
-                <input
-                  type="password"
-                  placeholder="비밀번호 재확인"
-                  name="passwordConfirm"
-                />
-              </p>
-              {result && <p> {result}</p>}
-              <p>
-                <button>적용하기</button>
-              </p>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
 
