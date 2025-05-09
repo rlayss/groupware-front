@@ -75,7 +75,7 @@
 
 .user-workspace-main {
   display: flex;
-  height: calc(100vh - 76px);
+  height: calc(100vh - 90px);
 }
 .user-workspace-side {
   padding: 20px;
@@ -273,11 +273,46 @@ h3 {
   overflow: hidden;
   white-space: nowrap;
 }
-
+/* 채팅방 UI */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 85vh;
+}
+.chat-container * {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.chat-container .chat-log {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  background: #fafafa;
+}
+.chat-container .chat-input {
+  border-top: 1px solid #ccc;
+  padding: 10px;
+  background: #fff;
+}
 .chat-container .message {
   width: 100%;
   height: 75px;
   resize: none;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   padding: 8px;
+}
+
+.chat-container .chat-item {
+  padding: 8px;
+  background-color: white;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.chat-container .chat-item .chat-item-header {
+  font-size: 0.7em;
+  color: #777;
+}
+
+.chat-container .chat-item .chat-item-body {
+  white-space: pre;
+  text-wrap: wrap;
 }

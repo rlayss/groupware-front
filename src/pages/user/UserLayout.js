@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router";
+import { Link, Outlet, useNavigate } from "react-router";
 import { useUserContext } from "../../provider/UserProvider";
 
 import { useEffect, useState } from "react";
@@ -6,11 +6,12 @@ import { Client } from "@stomp/stompjs";
 
 function UserWorkspaceLayout() {
   const [alarm, setAlarm] = useState([]);
-  const { user } = useUserContext();
+  const { user, setStompClient, setUser, setToken } = useUserContext();
+  const navigate = useNavigate();
 
   const webSoketInitialize = function () {
     const client = new Client({
-      brokerURL: "ws://192.168.10.62:9090/handshake",
+      brokerURL: "ws://192.168.10.173:9090/handshake",
       onConnect: function () {
         console.log("connected");
         client.subscribe("/public", function (message) {
@@ -28,15 +29,21 @@ function UserWorkspaceLayout() {
             return [...oldAlarm, message.body];
           });
         });
+
+        setStompClient(client);
       },
     });
-
     client.activate();
   };
 
   useEffect(() => {
-    webSoketInitialize();
+    if (!user) {
+      navigate("/user/index");
+    } else {
+      webSoketInitialize();
+    }
   }, []);
+
   const openPopup = function () {
     if (
       document.getElementById("alarm").style.display === "none" ||
@@ -47,6 +54,13 @@ function UserWorkspaceLayout() {
       document.getElementById("alarm").style.display = "none";
       setAlarm([]);
     }
+  };
+
+  const logoutHandle = function (evt) {
+    setUser(null);
+    setToken(null);
+    sessionStorage.clear();
+    navigate("/user/index");
   };
 
   return (
@@ -103,9 +117,14 @@ function UserWorkspaceLayout() {
           </ul>
           <ul>
             <li>
-              <Link to={"/user/workspace/chat/" + user.department.id}>
+              <Link to={"/user/workspace/chat/" + user?.department.id}>
                 부서 채팅방
               </Link>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <Link onClick={logoutHandle}>로그아웃</Link>
             </li>
           </ul>
         </div>
