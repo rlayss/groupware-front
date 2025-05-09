@@ -8,26 +8,35 @@ function UserBoardViewPage() {
   const { id } = useParams();
   const [item, setItem] = useState(null);
 
-  console.log(id);
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(
-        "http://192.168.10.173:9090/api/board/" + id,
-        {
-          method: "get",
-          headers: {
-            Authorization: "Bearer " + token,
-          },
+      try {
+        console.log("패치 시도: 게시글 ID =", id); // ← 추가
+        const response = await fetch(
+          "http://192.168.10.173:9090/api/board/" + id,
+          {
+            method: "GET",
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+
+        if (response.status === 404) {
+          console.warn("게시글을 찾을 수 없습니다.");
+          return;
         }
-      );
-      if (response.status === 404) {
-        return;
+
+        const obj = await response.json();
+        console.log("받은 데이터:", obj); // ← 추가
+        setItem(obj);
+      } catch (error) {
+        console.error("데이터 불러오기 오류:", error);
       }
-      const obj = await response.json();
-      setItem(obj);
     };
+
     fetchData();
-  }, []);
+  }, [id, token]);
 
   return (
     <div className="user-board">
